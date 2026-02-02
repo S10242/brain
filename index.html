@@ -1,14 +1,153 @@
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+  <title>NeuroMind Lab | 뇌과학과 심리학의 만남</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <a href="#" class="logo">NeuroMind<span>Lab</span>.</a>
+      <nav>
+        <ul>
+          <li><a href="#brain-map">뇌 구조 도감</a></li>
+          <li><a href="#psychology">심리 테스트</a></li>
+          <li><a href="#lectures">강의 목록</a></li>
+        </ul>
+        <button id="theme-toggle" class="btn-icon" aria-label="다크 모드 전환">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <div class="hero-text">
+        <span class="badge">Open Beta</span>
+        <h1>나의 뇌와 마음을<br>탐험하는 여정</h1>
+        <p>복잡한 뇌과학 지식과 심리학 법칙을<br>실험실에서 직접 관찰하듯 생생하게 경험하세요.</p>
+        <div class="cta-group">
+          <a href="#brain-map" class="btn btn-primary">뇌 탐험하기</a>
+          <a href="#lectures" class="btn btn-secondary">최신 강의 보기</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <!-- Abstract Brain Visual Placeholder -->
+        <div class="brain-pulse">
+          <div class="pulse-circle"></div>
+          <div class="pulse-circle"></div>
+          <span class="brain-icon">🧠</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Brain Map Section -->
+  <section id="brain-map" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Interactive Brain Map</h2>
+        <p>뇌의 각 부위를 클릭하여 숨겨진 기능을 알아보세요.</p>
+      </div>
+      
+      <div class="brain-map-container">
+        <!-- Simple SVG Representation of Brain for Interaction -->
+        <svg viewBox="0 0 500 400" class="brain-svg">
+          <path id="frontal-lobe" d="M150,150 Q200,50 300,100 T400,200" stroke="none" fill="rgba(56, 189, 248, 0.2)" />
+          <!-- Note: This is a simplified artistic representation for the prototype -->
+          <circle id="area-frontal" cx="180" cy="120" r="30" class="brain-node" data-region="전두엽" data-desc="의사결정, 계획 수립, 감정 조절을 담당하는 뇌의 CEO입니다." />
+          <circle id="area-temporal" cx="250" cy="200" r="30" class="brain-node" data-region="측두엽" data-desc="청각 정보 처리와 언어 이해, 기억 형성에 관여합니다." />
+          <circle id="area-occipital" cx="350" cy="180" r="30" class="brain-node" data-region="후두엽" data-desc="시각 정보를 처리하여 우리가 세상을 볼 수 있게 합니다." />
+          
+          <text x="180" y="125" text-anchor="middle" fill="white" font-size="12" pointer-events="none">전두엽</text>
+          <text x="250" y="205" text-anchor="middle" fill="white" font-size="12" pointer-events="none">측두엽</text>
+          <text x="350" y="185" text-anchor="middle" fill="white" font-size="12" pointer-events="none">후두엽</text>
+        </svg>
+
+        <div id="brain-info-card" class="info-card hidden">
+          <h3 id="region-title">뇌 부위 이름</h3>
+          <p id="region-desc">설명이 여기에 나타납니다.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Psychology Test Teaser -->
+  <section id="psychology" class="section bg-light">
+    <div class="container">
+      <div class="split-layout">
+        <div class="text-content">
+          <h2>오늘의 심리 상태는?</h2>
+          <p>간단한 질문을 통해 지금 당신의 스트레스 지수와 심리 상태를 확인해보세요. AI가 당신에게 필요한 심리학 법칙을 처방해드립니다.</p>
+          <button class="btn btn-primary" onclick="alert('심리 테스트 기능은 준비 중입니다!')">테스트 시작하기</button>
+        </div>
+        <div class="card test-card">
+          <div class="card-icon">🧪</div>
+          <h3>스트레스 자가 진단</h3>
+          <p>소요 시간: 3분</p>
+          <div class="progress-bar"><div class="fill" style="width: 0%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lectures Grid -->
+  <section id="lectures" class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Latest Lectures</h2>
+        <p>최신 뇌과학 및 심리학 강의를 만나보세요.</p>
+      </div>
+      <div class="grid">
+        <article class="card lecture-card">
+          <div class="card-image" style="background-color: #1e293b;"></div>
+          <div class="card-body">
+            <span class="tag">뇌과학</span>
+            <h3>도파민은 어떻게 우리를 조종하는가?</h3>
+            <p>동기 부여와 중독의 메커니즘을 뇌과학적 관점에서 분석합니다.</p>
+            <a href="#" class="read-more">강의 보기 →</a>
+          </div>
+        </article>
+        <article class="card lecture-card">
+          <div class="card-image" style="background-color: #334155;"></div>
+          <div class="card-body">
+            <span class="tag">심리학</span>
+            <h3>확증 편향: 보고 싶은 것만 보는 이유</h3>
+            <p>우리가 자신의 믿음을 강화하는 정보를 선호하는 심리적 기제.</p>
+            <a href="#" class="read-more">강의 보기 →</a>
+          </div>
+        </article>
+        <article class="card lecture-card">
+          <div class="card-image" style="background-color: #475569;"></div>
+          <div class="card-body">
+            <span class="tag">실험실</span>
+            <h3>파블로프의 개 실험의 현대적 해석</h3>
+            <p>고전적 조건 형성이 현대 마케팅에 어떻게 쓰이는지 알아봅니다.</p>
+            <a href="#" class="read-more">강의 보기 →</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-content">
+      <p>&copy; 2026 NeuroMind Lab. All rights reserved.</p>
+      <div class="social-links">
+        <a href="#">YouTube</a>
+        <a href="#">Instagram</a>
+        <a href="#">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="main.js"></script>
 </body>
 </html>
