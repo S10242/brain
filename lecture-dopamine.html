@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Dopamine Controls You | NeuroMind Lab</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Article Specific Styles */
+    .article-container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: var(--spacing-xl) var(--spacing-lg);
+    }
+    
+    .article-header {
+      text-align: center;
+      margin-bottom: var(--spacing-xl);
+    }
+    
+    .article-meta {
+      color: var(--color-secondary);
+      font-size: 0.9rem;
+      margin-top: var(--spacing-sm);
+    }
+    
+    .article-content {
+      font-size: 1.125rem;
+      line-height: 1.8;
+      color: var(--color-text);
+    }
+    
+    .article-content h2 {
+      font-size: 1.8rem;
+      margin-top: var(--spacing-xl);
+      margin-bottom: var(--spacing-md);
+      color: var(--color-primary);
+    }
+    
+    .article-content p {
+      margin-bottom: var(--spacing-lg);
+    }
+    
+    .article-content ul {
+      margin-bottom: var(--spacing-lg);
+      padding-left: var(--spacing-lg);
+      list-style-type: disc;
+    }
+
+    .article-content li {
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .highlight-box {
+      background-color: var(--color-light-bg);
+      border-left: 4px solid var(--color-accent);
+      padding: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    }
+
+    /* Back Button */
+    .back-nav {
+        margin-bottom: var(--spacing-lg);
+    }
+    
+    .back-nav a {
+        display: inline-flex;
+        align-items: center;
+        color: var(--color-secondary);
+        font-weight: 600;
+        transition: color 0.2s;
+    }
+    
+    .back-nav a:hover {
+        color: var(--color-accent);
+    }
+
+    .back-nav span {
+        margin-right: var(--spacing-sm);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container header-content">
+      <a href="index.html" class="logo">NeuroMind<span>Lab</span>.</a>
+      <nav>
+        <ul>
+          <li><a href="index.html#brain-map">Brain Map</a></li>
+          <li><a href="index.html#psychology">Psycho Test</a></li>
+          <li><a href="index.html#lectures">Lectures</a></li>
+        </ul>
+        <button id="theme-toggle" class="btn-icon" aria-label="Toggle Dark Mode">🌙</button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="article-container">
+    <div class="back-nav">
+        <a href="index.html#lectures"><span>←</span> Back to Lectures</a>
+    </div>
+
+    <article>
+      <header class="article-header">
+        <span class="badge">Brain Science</span>
+        <h1>How Dopamine Controls You</h1>
+        <div class="article-meta">
+          <span>By NeuroMind AI</span> • <span>Feb 2, 2026</span> • <span>5 min read</span>
+        </div>
+      </header>
+      
+      <!-- Placeholder Image -->
+      <div class="card-image" style="height: 300px; margin-bottom: var(--spacing-xl); border-radius: var(--border-radius);"></div>
+
+      <div class="article-content">
+        <p>You check your phone for no reason. You eat that extra slice of cake even though you're full. You binge-watch another episode instead of sleeping. Why?</p>
+        
+        <p>The answer often lies in a single molecule: <strong>Dopamine</strong>.</p>
+
+        <h2>The Molecule of "More"</h2>
+        <p>Dopamine is often misunderstood as the "pleasure chemical." In reality, it is the molecule of <strong>motivation, craving, and pursuit</strong>. It's not about the enjoyment of the reward itself, but the anticipation of it.</p>
+        
+        <div class="highlight-box">
+            <p><strong>Key Insight:</strong> Dopamine says "I want that," not necessarily "I like that." This is why you can doom-scroll social media for hours without actually feeling happy.</p>
+        </div>
+
+        <h2>How the Dopamine Loop Works</h2>
+        <p>The brain's reward system creates a loop to ensure our survival. Originally, this helped us find food and reproduce. Today, it reacts to notifications, likes, and sugar.</p>
+        
+        <ul>
+            <li><strong>Trigger:</strong> You see a notification badge.</li>
+            <li><strong>Action:</strong> You click the app.</li>
+            <li><strong>Reward:</strong> You see a new like or comment (uncertainty boosts dopamine).</li>
+            <li><strong>Investment:</strong> You scroll more, hoping for another hit.</li>
+        </ul>
+
+        <h2>Breaking the Cycle: Dopamine Detox</h2>
+        <p>To regain control, we need to reset our baseline dopamine levels. This doesn't mean eliminating all fun, but rather reducing high-stimulation activities that flood our receptors.</p>
+        
+        <p>Try these steps:</p>
+        <ul>
+            <li>Avoid your phone for the first hour of the morning.</li>
+            <li>Engage in "low-dopamine" activities like reading, walking, or meditating.</li>
+            <li>Embrace boredom. It is the precursor to creativity.</li>
+        </ul>
+
+        <p>By understanding how this chemical master controls your urges, you can step out of the passenger seat and start driving your own brain.</p>
+      </div>
+    </article>
+
+    <!-- Comments Section -->
+    <section id="comments" class="section">
+        <div id="disqus_thread"></div>
+        <script>
+            /**
+            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+            /*
+            var disqus_config = function () {
+            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+            };
+            */
+            (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document, s = d.createElement('script');
+            s.src = 'https://neuromind-lab.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p>&copy; 2026 NeuroMind Lab. All rights reserved.</p>
+      <div class="social-links">
+        <a href="#">YouTube</a>
+        <a href="#">Instagram</a>
+        <a href="#">Email</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

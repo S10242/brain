@@ -58,25 +58,63 @@
       </div>
       
       <div class="brain-map-container">
-        <!-- Simple SVG Representation of Brain for Interaction -->
-        <svg viewBox="0 0 500 400" class="brain-svg">
-          <path id="frontal-lobe" d="M150,150 Q200,50 300,100 T400,200" stroke="none" fill="rgba(56, 189, 248, 0.2)" />
+        <!-- Detailed SVG Representation of Brain for Interaction -->
+        <svg viewBox="0 0 800 600" class="brain-svg" style="max-height: 500px;">
+          <defs>
+            <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+              <feGaussianBlur stdDeviation="3" result="blur" />
+              <feComposite in="SourceGraphic" in2="blur" operator="over" />
+            </filter>
+          </defs>
           
-          <circle id="area-frontal" cx="180" cy="120" r="30" class="brain-node" 
+          <!-- Frontal Lobe (Reddish/Pink) -->
+          <path id="lobe-frontal" class="brain-region" 
+            d="M 250,300 C 200,300 150,250 180,150 C 220,50 350,20 420,50 C 450,120 420,200 400,220 L 250,300 Z" 
+            fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444" stroke-width="2"
             data-region="Frontal Lobe" 
-            data-desc="The CEO of the brain. Responsible for decision-making, planning, and emotional regulation." />
+            data-desc="The 'CEO' of the brain. Responsible for executive functions like decision-making, planning, problem-solving, and emotional regulation." />
             
-          <circle id="area-temporal" cx="250" cy="200" r="30" class="brain-node" 
-            data-region="Temporal Lobe" 
-            data-desc="Involved in processing auditory information, language comprehension, and memory formation." />
-            
-          <circle id="area-occipital" cx="350" cy="180" r="30" class="brain-node" 
+          <!-- Parietal Lobe (Yellowish/Orange) -->
+          <path id="lobe-parietal" class="brain-region" 
+            d="M 420,50 C 500,40 600,80 620,150 C 600,200 550,250 480,240 C 440,220 420,120 420,50 Z" 
+            fill="rgba(245, 158, 11, 0.2)" stroke="#f59e0b" stroke-width="2"
+            data-region="Parietal Lobe" 
+            data-desc="Processes sensory information (touch, temperature, pain) and is key for spatial awareness and navigation." />
+
+          <!-- Occipital Lobe (Greenish) -->
+          <path id="lobe-occipital" class="brain-region" 
+            d="M 620,150 C 650,200 640,280 580,320 C 520,300 500,260 480,240 C 550,250 600,200 620,150 Z" 
+            fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" stroke-width="2"
             data-region="Occipital Lobe" 
-            data-desc="Processes visual information, allowing us to see and interpret the world." />
-          
-          <text x="180" y="125" text-anchor="middle" fill="white" font-size="12" pointer-events="none">Frontal</text>
-          <text x="250" y="205" text-anchor="middle" fill="white" font-size="12" pointer-events="none">Temporal</text>
-          <text x="350" y="185" text-anchor="middle" fill="white" font-size="12" pointer-events="none">Occipital</text>
+            data-desc=" The visual processing center. It interprets what your eyes see, including color, form, and motion." />
+
+          <!-- Temporal Lobe (Blueish) -->
+          <path id="lobe-temporal" class="brain-region" 
+            d="M 250,300 C 280,350 350,380 450,350 C 480,320 480,240 400,220 C 350,250 300,280 250,300 Z" 
+            fill="rgba(59, 130, 246, 0.2)" stroke="#3b82f6" stroke-width="2"
+            data-region="Temporal Lobe" 
+            data-desc="Vital for processing auditory information (hearing) and encoding memory. It also houses the hippocampus." />
+
+          <!-- Cerebellum (Purplish) -->
+          <path id="lobe-cerebellum" class="brain-region" 
+            d="M 450,350 C 480,400 550,420 600,380 C 620,340 580,320 500,340 L 450,350 Z" 
+            fill="rgba(139, 92, 246, 0.2)" stroke="#8b5cf6" stroke-width="2"
+            data-region="Cerebellum" 
+            data-desc="Responsible for balance, coordination, and fine motor control. It helps you walk upright and play instruments." />
+
+          <!-- Brain Stem (Grayish) -->
+          <path id="lobe-stem" class="brain-region" 
+            d="M 380,380 C 380,450 390,500 420,520 C 450,500 460,420 450,350 C 420,360 400,370 380,380 Z" 
+            fill="rgba(100, 116, 139, 0.2)" stroke="#64748b" stroke-width="2"
+            data-region="Brain Stem" 
+            data-desc="Controls basic life functions like breathing, heart rate, and sleeping. It connects the brain to the spinal cord." />
+            
+          <!-- Labels -->
+          <text x="300" y="150" text-anchor="middle" fill="currentColor" font-size="16" pointer-events="none" class="svg-label">Frontal</text>
+          <text x="500" y="120" text-anchor="middle" fill="currentColor" font-size="16" pointer-events="none" class="svg-label">Parietal</text>
+          <text x="580" y="240" text-anchor="middle" fill="currentColor" font-size="16" pointer-events="none" class="svg-label">Occipital</text>
+          <text x="350" y="310" text-anchor="middle" fill="currentColor" font-size="16" pointer-events="none" class="svg-label">Temporal</text>
+          <text x="530" y="380" text-anchor="middle" fill="currentColor" font-size="14" pointer-events="none" class="svg-label">Cerebellum</text>
         </svg>
 
         <div id="brain-info-card" class="info-card hidden">
@@ -150,7 +188,7 @@
             <span class="tag">Brain Science</span>
             <h3>How Dopamine Controls You</h3>
             <p>Analyzing the mechanism of motivation and addiction from a neuroscience perspective.</p>
-            <a href="#" class="read-more">Read Lecture →</a>
+            <a href="lecture-dopamine.html" class="read-more">Read Lecture →</a>
           </div>
         </article>
         <article class="card lecture-card">

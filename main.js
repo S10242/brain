@@ -43,32 +43,70 @@ function initThemeToggle() {
  * Handle Interactive Brain Map Logic
  */
 function initBrainMap() {
-  const nodes = document.querySelectorAll('.brain-node');
+  const regions = document.querySelectorAll('.brain-region');
   const infoCard = document.getElementById('brain-info-card');
   const regionTitle = document.getElementById('region-title');
   const regionDesc = document.getElementById('region-desc');
 
-  if (!infoCard) return; // Guard clause if element doesn't exist
+  if (!infoCard) return;
 
-  nodes.forEach(node => {
-    node.addEventListener('click', (e) => {
-      const region = node.getAttribute('data-region');
-      const desc = node.getAttribute('data-desc');
+  regions.forEach(region => {
+    // Initial opacity for all
+    region.style.opacity = '0.7';
+    region.style.transition = 'all 0.3s ease';
+    region.style.cursor = 'pointer';
 
-      regionTitle.textContent = region;
+    region.addEventListener('click', (e) => {
+      const name = region.getAttribute('data-region');
+      const desc = region.getAttribute('data-desc');
+
+      regionTitle.textContent = name;
       regionDesc.textContent = desc;
 
       infoCard.classList.remove('hidden');
 
-      nodes.forEach(n => n.setAttribute('fill', 'rgba(56, 189, 248, 0.2)')); 
-      node.setAttribute('fill', '#38bdf8'); 
+      // Visual feedback: Highlight selected, dim others
+      regions.forEach(r => {
+        r.style.opacity = '0.3';
+        r.style.strokeWidth = '1';
+      });
+      
+      region.style.opacity = '1';
+      region.style.strokeWidth = '3';
+    });
+
+    // Hover effect
+    region.addEventListener('mouseenter', () => {
+        if (region.style.opacity !== '1') {
+            region.style.opacity = '0.9';
+        }
+    });
+    
+    region.addEventListener('mouseleave', () => {
+        if (region.style.opacity !== '1') {
+            region.style.opacity = '0.7'; // Revert if not selected
+        }
+         // If selected (opacity 1), keep it 1. But logic above resets all to 0.3 on click.
+         // Better logic: check if this is the "active" one? 
+         // For simplicity in this vanilla JS, we'll let the click handler dominate state
+         // and just have simple hover brightness.
+         const isSelected = region.style.strokeWidth === '3';
+         if (!isSelected) {
+             // check if any other is selected?
+             const anySelected = Array.from(regions).some(r => r.style.strokeWidth === '3');
+             region.style.opacity = anySelected ? '0.3' : '0.7';
+         }
     });
   });
 
+  // Close card when clicking outside
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.brain-svg') && !e.target.closest('.info-card')) {
        infoCard.classList.add('hidden');
-       nodes.forEach(n => n.setAttribute('fill', 'rgba(56, 189, 248, 0.2)')); 
+       regions.forEach(r => {
+         r.style.opacity = '0.7';
+         r.style.strokeWidth = '2';
+       });
     }
   });
 }
