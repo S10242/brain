@@ -39,3 +39,6 @@
 ## 5. Current Task: Feature Implementation
 *   Translate all content to English.
 *   Implement the Stress Self-Assessment functionality (Quiz UI & Logic).
+*   Upgrade the Interactive Brain Map with detailed SVG regions.
+*   Integrate Disqus for comments on lecture detail pages.
+*   Final verification of all features, bug fixes, and responsive design.
