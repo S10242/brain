@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stress Test - NeuroMind Lab</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="test.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">NeuroMind<span>Lab</span>.</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#brain-map">Brain Map</a></li>
+                    <li><a href="index.html#psychology">Psycho Test</a></li>
+                    <li><a href="index.html#lectures">Lectures</a></li>
+                </ul>
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle Dark Mode">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container test-page">
+        <div class="test-header">
+            <h1>Stress Self-Assessment</h1>
+            <p>A quick 5-question test to measure your current stress level.</p>
+        </div>
+
+        <div class="card test-card" id="test-container">
+            <!-- Initial State -->
+            <div id="test-intro">
+              <div class="card-icon">🧪</div>
+              <h3>Stress Self-Assessment</h3>
+              <p>Duration: 3 mins</p>
+              <button id="start-test-btn" class="btn btn-primary">Start Stress Test</button>
+            </div>
+  
+            <!-- Question State (Hidden by default) -->
+            <div id="test-question-box" class="hidden">
+              <div class="progress-bar"><div class="fill" style="width: 0%"></div></div>
+              <div class="question-header">
+                <span id="question-number">Q1</span>
+                <span id="question-progress">1/5</span>
+              </div>
+              <h3 id="question-text">I often feel irritated easily.</h3>
+              <div class="options-grid">
+                <button class="option-btn" data-score="1">Never</button>
+                <button class="option-btn" data-score="2">Rarely</button>
+                <button class="option-btn" data-score="3">Sometimes</button>
+                <button class="option-btn" data-score="4">Often</button>
+                <button class="option-btn" data-score="5">Always</button>
+              </div>
+            </div>
+  
+            <!-- Result State (Hidden by default) -->
+            <div id="test-result-box" class="hidden">
+              <h3>Your Stress Level</h3>
+              <div class="score-display">
+                <span id="result-score">0</span><span>/ 100</span>
+              </div>
+              <h4 id="result-title">Moderate Stress</h4>
+              <p id="result-desc">You are managing well, but taking some time for mindfulness could help.</p>
+              <button class="btn btn-secondary" onclick="location.reload()">Retest</button>
+            </div>
+          </div>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 NeuroMind Lab. All rights reserved.</p>
+            <div class="social-links">
+                <a href="about.html">About Us</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+    
+    <script type="module" src="test.js"></script>
+</body>
+</html>

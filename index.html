@@ -86,48 +86,41 @@
   <!-- Psychology Test Section -->
   <section id="psychology" class="section bg-light">
     <div class="container">
-      <div class="split-layout">
-        <div class="text-content">
-          <h2>Check Your Mind</h2>
-          <p>Discover your current stress level and mental state through a simple self-assessment. AI will prescribe the psychological advice you need right now.</p>
-          <button id="start-test-btn" class="btn btn-primary">Start Stress Test</button>
-        </div>
-        <div class="card test-card" id="test-container">
-          <!-- Initial State -->
-          <div id="test-intro">
-            <div class="card-icon">🧪</div>
+      <div class="section-header">
+        <h2>Check Your Mind</h2>
+        <p>Discover insights into your personality and mental state with these assessments.</p>
+      </div>
+      <div class="grid">
+        <!-- Stress Test Card -->
+        <article class="card lecture-card">
+          <div class="card-image" style="background-color: #5b21b6;"></div>
+          <div class="card-body">
+            <span class="tag">Well-being</span>
             <h3>Stress Self-Assessment</h3>
-            <p>Duration: 3 mins</p>
-            <div class="progress-bar"><div class="fill" style="width: 0%"></div></div>
+            <p>Measure your current stress level with this quick 5-question test.</p>
+            <a href="stress-test.html" class="read-more">Start Test →</a>
           </div>
-
-          <!-- Question State (Hidden by default) -->
-          <div id="test-question-box" class="hidden">
-            <div class="question-header">
-              <span id="question-number">Q1</span>
-              <span id="question-progress">1/5</span>
-            </div>
-            <h3 id="question-text">I often feel irritated easily.</h3>
-            <div class="options-grid">
-              <button class="option-btn" data-score="1">Never</button>
-              <button class="option-btn" data-score="2">Rarely</button>
-              <button class="option-btn" data-score="3">Sometimes</button>
-              <button class="option-btn" data-score="4">Often</button>
-              <button class="option-btn" data-score="5">Always</button>
-            </div>
+        </article>
+        <!-- Color Test Card -->
+        <article class="card lecture-card">
+          <div class="card-image" style="background-color: #16a34a;"></div>
+          <div class="card-body">
+            <span class="tag">Creativity</span>
+            <h3>Color Psychology Test</h3>
+            <p>What does your favorite color say about your personality?</p>
+            <a href="test-color.html" class="read-more">Start Test →</a>
           </div>
-
-          <!-- Result State (Hidden by default) -->
-          <div id="test-result-box" class="hidden">
-            <h3>Your Stress Level</h3>
-            <div class="score-display">
-              <span id="result-score">0</span><span>/ 100</span>
-            </div>
-            <h4 id="result-title">Moderate Stress</h4>
-            <p id="result-desc">You are managing well, but taking some time for mindfulness could help.</p>
-            <button class="btn btn-secondary" onclick="location.reload()">Retest</button>
+        </article>
+        <!-- Personality Test Card -->
+        <article class="card lecture-card">
+          <div class="card-image" style="background-color: #0ea5e9;"></div>
+          <div class="card-body">
+            <span class="tag">Self-Discovery</span>
+            <h3>Mini Personality Test</h3>
+            <p>A quick test based on the Big Five model to find your dominant trait.</p>
+            <a href="test-personality.html" class="read-more">Start Test →</a>
           </div>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -141,7 +134,9 @@
       </div>
       <div class="grid">
         <article class="card lecture-card">
-          <div class="card-image" style="background-color: #1e293b;"></div>
+          <a href="lecture-dopamine.html" class="card-image-link">
+            <img src="https://images.unsplash.com/photo-1620092285115-4c2a5538b902?q=80&w=800&auto=format&fit=crop" alt="Abstract visualization of neural pathways" class="card-image" />
+          </a>
           <div class="card-body">
             <span class="tag">Brain Science</span>
             <h3>How Dopamine Controls You: The Science of Craving</h3>
@@ -150,7 +145,9 @@
           </div>
         </article>
         <article class="card lecture-card">
-          <div class="card-image" style="background-color: #334155;"></div>
+          <a href="lecture-confirmation-bias.html" class="card-image-link">
+            <img src="https://images.unsplash.com/photo-1505682499293-23f5f34126c2?q=80&w=800&auto=format&fit=crop" alt="Abstract image showing a person inside a bubble" class="card-image" />
+          </a>
           <div class="card-body">
             <span class="tag">Psychology</span>
             <h3>Confirmation Bias: Why Your Brain Loves Being Right (and How to Fight It)</h3>
@@ -159,7 +156,9 @@
           </div>
         </article>
         <article class="card lecture-card">
-          <div class="card-image" style="background-color: #475569;"></div>
+          <a href="lecture-pavlov.html" class="card-image-link">
+            <img src="https://images.unsplash.com/photo-1576201836106-db1758b1c59a?q=80&w=800&auto=format&fit=crop" alt="A dog looking at a bell expectantly" class="card-image" />
+          </a>
           <div class="card-body">
             <span class="tag">Lab</span>
             <h3>Are You a Modern Pavlov's Dog? The Science of Being Trained</h3>

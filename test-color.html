@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Psychology Test - NeuroMind Lab</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="test.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header>
+        <div class="container header-content">
+            <a href="index.html" class="logo">NeuroMind<span>Lab</span>.</a>
+            <nav>
+                <ul>
+                    <li><a href="index.html#brain-map">Brain Map</a></li>
+                    <li><a href="index.html#psychology">Psycho Test</a></li>
+                    <li><a href="index.html#lectures">Lectures</a></li>
+                </ul>
+                <button id="theme-toggle" class="btn-icon" aria-label="Toggle Dark Mode">🌙</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container test-page">
+        <div class="test-header">
+            <h1>Color Psychology Test</h1>
+            <p>Choose the color that you are most drawn to right now.</p>
+        </div>
+
+        <div class="card test-card" id="color-test-container">
+            <!-- Color Options -->
+            <div id="color-options" class="options-grid">
+                <button class="option-btn color-btn" data-color="red" style="background-color: #E53935;"></button>
+                <button class="option-btn color-btn" data-color="orange" style="background-color: #FB8C00;"></button>
+                <button class="option-btn color-btn" data-color="yellow" style="background-color: #FDD835;"></button>
+                <button class="option-btn color-btn" data-color="green" style="background-color: #43A047;"></button>
+                <button class="option-btn color-btn" data-color="blue" style="background-color: #1E88E5;"></button>
+                <button class="option-btn color-btn" data-color="purple" style="background-color: #8E24AA;"></button>
+                <button class="option-btn color-btn" data-color="black" style="background-color: #212121;"></button>
+                <button class="option-btn color-btn" data-color="white" style="background-color: #FAFAFA; border: 1px solid #ddd;"></button>
+            </div>
+
+            <!-- Result State (Hidden by default) -->
+            <div id="color-result-box" class="hidden">
+                <h3 id="result-title"></h3>
+                <p id="result-desc"></p>
+                <button class="btn btn-secondary" onclick="location.reload()">Try Again</button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2026 NeuroMind Lab. All rights reserved.</p>
+            <div class="social-links">
+                <a href="about.html">About Us</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module" src="test.js"></script>
+</body>
+</html>

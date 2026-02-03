@@ -323,6 +323,8 @@ nav a:hover {
 
 .card-image {
   height: 200px;
+  width: 100%;
+  object-fit: cover;
   background-color: var(--color-secondary);
 }
 
