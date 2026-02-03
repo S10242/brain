@@ -1,0 +1,237 @@
+:root {
+  --color-did-you-know-bg: #fffbeb;
+  --color-did-you-know-border: #fcd34d;
+  --color-did-you-know-text: #92400e;
+}
+
+[data-theme="dark"] {
+  --color-did-you-know-bg: #451a03;
+  --color-did-you-know-border: #92400e;
+  --color-did-you-know-text: #fef3c7;
+}
+
+.article-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-lg) var(--spacing-lg);
+}
+
+.back-nav { 
+  margin-bottom: var(--spacing-lg); 
+}
+
+.back-nav a {
+  display: inline-flex; 
+  align-items: center; 
+  color: var(--color-secondary);
+  font-weight: 600; 
+  transition: color 0.2s;
+  font-size: 0.95rem;
+}
+
+.back-nav a:hover { 
+  color: var(--color-accent); 
+}
+
+.back-nav span { 
+  margin-right: var(--spacing-sm); 
+}
+
+.article-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: var(--spacing-lg);
+}
+
+.article-header h1 {
+  font-size: 2.8rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+}
+
+.article-meta {
+  color: var(--color-secondary);
+  font-size: 0.9rem;
+  margin-top: var(--spacing-md);
+  font-weight: 500;
+}
+
+.article-content {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--color-text);
+}
+
+.article-content h2 {
+  font-size: 1.9rem;
+  margin-top: 3.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.article-content h3 {
+  font-size: 1.5rem;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-primary);
+}
+
+.article-content p {
+  margin-bottom: 1.5rem;
+}
+
+.article-content ul, .article-content ol {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.article-content li {
+  margin-bottom: 0.75rem;
+  padding-left: 0.5rem;
+}
+
+.article-content li::marker {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.article-content strong {
+  color: var(--color-primary);
+}
+
+.article-content em {
+  font-style: italic;
+  color: var(--color-secondary);
+}
+
+.article-content code {
+  background-color: var(--color-light-bg);
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.95em;
+  border: 1px solid var(--color-border);
+}
+
+.content-image {
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  background-color: var(--color-light-bg);
+  border-radius: var(--border-radius);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2.5rem 0;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--color-border);
+}
+
+.caption {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-secondary);
+  margin-top: -2rem;
+  margin-bottom: 2.5rem;
+  font-style: italic;
+}
+
+/* Feature Boxes */
+.highlight-box {
+  background: linear-gradient(135deg, hsla(204, 96%, 62%, 0.1) 0%, hsla(204, 96%, 62%, 0.05) 100%);
+  border: 1px solid hsla(204, 96%, 62%, 0.3);
+  padding: 2rem;
+  margin: 2.5rem 0;
+  border-radius: var(--border-radius);
+}
+
+.highlight-box h3 {
+  margin-top: 0;
+  color: var(--color-accent);
+}
+
+.did-you-know {
+  background-color: var(--color-did-you-know-bg);
+  border: 1px solid var(--color-did-you-know-border);
+  color: var(--color-did-you-know-text);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  margin: 2.5rem 0;
+}
+
+.did-you-know strong {
+  color: var(--color-did-you-know-text);
+}
+
+.action-plan {
+  background-color: var(--color-primary);
+  color: var(--color-bg); /* Fix for dark mode visibility */
+  padding: 2.5rem;
+  border-radius: var(--border-radius);
+  margin-top: 3.5rem;
+}
+
+.action-plan h3 { 
+  color: var(--color-accent); 
+  margin-top: 0; 
+}
+
+.action-plan ul { 
+  list-style: none; 
+  padding: 0; 
+  margin-top: 1.5rem;
+}
+
+.action-plan li { 
+  margin-bottom: 1rem; 
+  display: flex; 
+  align-items: flex-start; 
+  padding-left: 0;
+}
+
+.action-plan li::before {
+  content: '🛡️';
+  margin-right: 12px;
+  font-size: 1.1rem;
+}
+
+/* For dopamine lecture '✅' */
+.action-plan.dopamine-plan li::before {
+    content: '✅';
+}
+
+#comments {
+    border-top: 1px solid var(--color-border);
+    padding-top: var(--spacing-lg);
+    margin-top: var(--spacing-xl);
+}
+
+/* Specific to pavlov lecture */
+.blueprint { 
+  border: 2px dashed var(--color-border); 
+  padding: 2rem; 
+  border-radius: var(--border-radius); 
+  margin: 2.5rem 0; 
+}
+.blueprint-stage { 
+  margin-bottom: 1.5rem; 
+}
+.blueprint-stage:last-child {
+    margin-bottom: 0;
+}
+.blueprint-stage strong { 
+  color: var(--color-primary); 
+}
+
+@media (max-width: 768px) {
+  .article-header h1 {
+    font-size: 2.2rem;
+  }
+  .article-content {
+    font-size: 1.05rem;
+  }
+}

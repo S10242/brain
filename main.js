@@ -1,8 +1,11 @@
 // main.js
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
-  initBrainMap();
+  init3DBrain(); // Replace initBrainMap with the 3D version
   initPsychoTest();
 });
 
@@ -36,80 +39,156 @@ function initThemeToggle() {
     
     document.documentElement.setAttribute('data-theme', theme);
     localStorage.setItem('theme', theme);
+    // Dispatch a custom event to notify the 3D brain of the theme change
+    window.dispatchEvent(new CustomEvent('themeChanged', { detail: { theme } }));
   });
 }
 
 /**
- * Handle Interactive Brain Map Logic
+ * Handle Interactive 3D Brain Map Logic
  */
-function initBrainMap() {
-  const regions = document.querySelectorAll('.brain-region');
-  const infoCard = document.getElementById('brain-info-card');
-  const regionTitle = document.getElementById('region-title');
-  const regionDesc = document.getElementById('region-desc');
+function init3DBrain() {
+    const container = document.getElementById('brain-canvas-container');
+    const loaderElement = document.getElementById('loader');
+    if (!container) return;
 
-  if (!infoCard) return;
+    // Scene setup
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    camera.position.z = 10;
 
-  regions.forEach(region => {
-    // Initial opacity for all
-    region.style.opacity = '0.7';
-    region.style.transition = 'all 0.3s ease';
-    region.style.cursor = 'pointer';
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(window.devicePixelRatio);
+    container.appendChild(renderer.domElement);
 
-    region.addEventListener('click', (e) => {
-      const name = region.getAttribute('data-region');
-      const desc = region.getAttribute('data-desc');
+    // Lighting
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
+    scene.add(ambientLight);
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+    directionalLight.position.set(5, 10, 7.5);
+    scene.add(directionalLight);
 
-      regionTitle.textContent = name;
-      regionDesc.textContent = desc;
+    // Controls
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.minDistance = 5;
+    controls.maxDistance = 20;
 
-      infoCard.classList.remove('hidden');
+    // Raycasting for interaction
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+    let INTERSECTED;
 
-      // Visual feedback: Highlight selected, dim others
-      regions.forEach(r => {
-        r.style.opacity = '0.3';
-        r.style.strokeWidth = '1';
-      });
-      
-      region.style.opacity = '1';
-      region.style.strokeWidth = '3';
-    });
+    // --- IMPORTANT ---
+    // User needs to download a GLB/GLTF model and place it in the project root.
+    // I am using a placeholder path.
+    const modelPath = 'https://productioncrate.com/cdn-cgi/mirage/51249b89b8098103c85f6e5b44585c490a6e387c1341c2c31c071d0b36d0716b/1280/3d/HumanAnatomy_Brain_prores.glb'; 
+    const loader = new GLTFLoader();
 
-    // Hover effect
-    region.addEventListener('mouseenter', () => {
-        if (region.style.opacity !== '1') {
-            region.style.opacity = '0.9';
-        }
-    });
+    // Data mapping from assumed mesh names to descriptions
+    const brainData = {
+        'Frontal_Lobe': { name: 'Frontal Lobe', desc: "The 'CEO' of the brain. Responsible for executive functions like decision-making, planning, problem-solving, and emotional regulation." },
+        'Parietal_Lobe': { name: 'Parietal Lobe', desc: 'Processes sensory information (touch, temperature, pain) and is key for spatial awareness and navigation.' },
+        'Occipital_Lobe': { name: 'Occipital Lobe', desc: 'The visual processing center. It interprets what your eyes see, including color, form, and motion.' },
+        'Temporal_Lobe': { name: 'Temporal Lobe', desc: 'Vital for processing auditory information (hearing) and encoding memory. It also houses the hippocampus.' },
+        'Cerebellum': { name: 'Cerebellum', desc: 'Responsible for balance, coordination, and fine motor control. It helps you walk upright and play instruments.' }
+    };
     
-    region.addEventListener('mouseleave', () => {
-        if (region.style.opacity !== '1') {
-            region.style.opacity = '0.7'; // Revert if not selected
-        }
-         // If selected (opacity 1), keep it 1. But logic above resets all to 0.3 on click.
-         // Better logic: check if this is the "active" one? 
-         // For simplicity in this vanilla JS, we'll let the click handler dominate state
-         // and just have simple hover brightness.
-         const isSelected = region.style.strokeWidth === '3';
-         if (!isSelected) {
-             // check if any other is selected?
-             const anySelected = Array.from(regions).some(r => r.style.strokeWidth === '3');
-             region.style.opacity = anySelected ? '0.3' : '0.7';
-         }
-    });
-  });
+    const brainRegions = [];
 
-  // Close card when clicking outside
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('.brain-svg') && !e.target.closest('.info-card')) {
-       infoCard.classList.add('hidden');
-       regions.forEach(r => {
-         r.style.opacity = '0.7';
-         r.style.strokeWidth = '2';
-       });
+    loader.load(modelPath, (gltf) => {
+        const model = gltf.scene;
+        scene.add(model);
+        loaderElement.style.display = 'none';
+
+        model.traverse((child) => {
+            if (child.isMesh) {
+                // A simplified approach: assuming mesh names correspond to our data keys
+                const regionKey = Object.keys(brainData).find(key => child.name.includes(key));
+                if(regionKey) {
+                    child.userData = brainData[regionKey];
+                    brainRegions.push(child);
+                    // Store original material properties
+                    child.material.originalEmissive = child.material.emissive.getHex();
+                }
+            }
+        });
+        
+    }, undefined, (error) => {
+        console.error('An error happened while loading the model:', error);
+        loaderElement.textContent = 'Failed to load 3D model. Please ensure the model file is accessible.';
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', onWindowResize, false);
+    function onWindowResize() {
+        camera.aspect = container.clientWidth / container.clientHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(container.clientWidth, container.clientHeight);
     }
-  });
+
+    // Handle mouse move for highlighting
+    container.addEventListener('mousemove', onMouseMove);
+    function onMouseMove(event) {
+        const rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+        mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+    }
+
+    // Handle click for showing info card
+    container.addEventListener('click', onClick);
+    function onClick(event) {
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(brainRegions);
+
+        if (intersects.length > 0) {
+            const infoCard = document.getElementById('brain-info-card');
+            const regionTitle = document.getElementById('region-title');
+            const regionDesc = document.getElementById('region-desc');
+
+            regionTitle.textContent = intersects[0].object.userData.name;
+            regionDesc.textContent = intersects[0].object.userData.desc;
+            infoCard.classList.remove('hidden');
+        }
+    }
+
+
+    function animate() {
+        requestAnimationFrame(animate);
+        controls.update();
+
+        // Raycasting logic
+        raycaster.setFromCamera(mouse, camera);
+        const intersects = raycaster.intersectObjects(brainRegions);
+        const infoCard = document.getElementById('brain-info-card');
+
+        if (intersects.length > 0) {
+            if (INTERSECTED != intersects[0].object) {
+                if (INTERSECTED) {
+                    INTERSECTED.material.emissive.setHex(INTERSECTED.material.originalEmissive);
+                }
+                INTERSECTED = intersects[0].object;
+                INTERSECTED.material.emissive.setHex(0x00ff00); // Highlight color
+                container.style.cursor = 'pointer';
+            }
+        } else {
+            if (INTERSECTED) {
+                INTERSECTED.material.emissive.setHex(INTERSECTED.material.originalEmissive);
+            }
+            INTERSECTED = null;
+            container.style.cursor = 'auto';
+            if(!event.target.closest('.info-card')){
+                 infoCard.classList.add('hidden');
+            }
+        }
+
+        renderer.render(scene, camera);
+    }
+
+    animate();
 }
+
 
 /**
  * Handle Psychology Stress Test Logic
@@ -136,7 +215,7 @@ function initPsychoTest() {
   // Start Test
   startBtn.addEventListener('click', () => {
     introBox.classList.add('hidden');
-    startBtn.style.display = 'none'; // Hide start button in text area
+    startBtn.style.display = 'none'; 
     questionBox.classList.remove('hidden');
     renderQuestion();
   });
@@ -177,8 +256,6 @@ function initPsychoTest() {
     resultBox.classList.remove('hidden');
     document.querySelector('.fill').style.width = '100%';
 
-    // Max score is 25 (5 questions * 5 points)
-    // Normalized to 100 scale for easier reading
     const finalScore = (totalScore / (questions.length * 5)) * 100;
     
     const scoreDisplay = document.getElementById('result-score');
