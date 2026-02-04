@@ -1,9 +1,21 @@
 // brain.js
 import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 
-export function createBrain() {
-    const geometry = new THREE.SphereGeometry(5, 32, 32);
-    const material = new THREE.MeshStandardMaterial({ color: 0xcccccc });
-    const brain = new THREE.Mesh(geometry, material);
-    return brain;
+export function createBrain(onLoad) {
+    const loader = new GLTFLoader();
+    loader.load(
+        'https://raw.githubusercontent.com/VyomGarg47/Sample-GLTF-Models/main/Brain/Brain.gltf',
+        function (gltf) {
+            const brain = gltf.scene;
+            // Optional: Adjust model's scale, position, rotation
+            brain.scale.set(5, 5, 5);
+            brain.position.y = -2;
+            onLoad(brain);
+        },
+        undefined,
+        function (error) {
+            console.error(error);
+        }
+    );
 }

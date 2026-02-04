@@ -75,9 +75,79 @@ function init3DBrain() {
     controls.maxDistance = 20;
 
     // Create and add the brain model
-    const brain = createBrain();
-    scene.add(brain);
-    loaderElement.style.display = 'none';
+    createBrain(function (brain) {
+        scene.add(brain);
+        loaderElement.style.display = 'none';
+
+        const brainRegions = {
+            'B_parietal_L': { title: 'Left Parietal Lobe', desc: 'The parietal lobe is vital for sensory perception and integration, including the management of taste, hearing, sight, touch, and smell.' },
+            'B_parietal_R': { title: 'Right Parietal Lobe', desc: 'The parietal lobe is vital for sensory perception and integration, including the management of taste, hearing, sight, touch, and smell.' },
+            'B_frontal_L': { title: 'Left Frontal Lobe', desc: 'The frontal lobe is the home of our cognitive functions, such as emotional expression, problem-solving, memory, language, and judgment.' },
+            'B_frontal_R': { title: 'Right Frontal Lobe', desc: 'The frontal lobe is the home of our cognitive functions, such as emotional expression, problem-solving, memory, language, and judgment.' },
+            'B_occipital_L': { title: 'Left Occipital Lobe', desc: 'The occipital lobe is the visual processing center of the brain.' },
+            'B_occipital_R': { title: 'Right Occipital Lobe', desc: 'The occipital lobe is the visual processing center of the brain.' },
+            'B_temporal_L': { title: 'Left Temporal Lobe', desc: 'The temporal lobe is associated with processing auditory information and with the encoding of memory.' },
+            'B_temporal_R': { title: 'Right Temporal Lobe', desc: 'The temporal lobe is associated with processing auditory information and with the encoding of memory.' },
+            'B_cerebellum_L': { title: 'Left Cerebellum', desc: 'The cerebellum coordinates voluntary movements such as posture, balance, coordination, and speech.' },
+            'B_cerebellum_R': { title: 'Right Cerebellum', desc: 'The cerebellum coordinates voluntary movements such as posture, balance, coordination, and speech.' },
+        };
+
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+        let hovered = null;
+
+        function onMouseMove(event) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(brain.children, true);
+
+            if (hovered) {
+                hovered.object.material.emissive.setHex(hovered.originalHex);
+                hovered = null;
+            }
+
+            if (intersects.length > 0) {
+                const object = intersects[0].object;
+                if (object.material) {
+                    hovered = {
+                        object: object,
+                        originalHex: object.material.emissive.getHex()
+                    };
+                    object.material.emissive.setHex(0xff0000);
+                }
+            }
+        }
+
+        function onClick(event) {
+            mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+            mouse.y = - (event.clientY / window.innerHeight) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(brain.children, true);
+
+            const infoCard = document.getElementById('brain-info-card');
+            const titleEl = document.getElementById('region-title');
+            const descEl = document.getElementById('region-desc');
+
+            if (intersects.length > 0) {
+                const region = brainRegions[intersects[0].object.name];
+                if (region) {
+                    titleEl.textContent = region.title;
+                    descEl.textContent = region.desc;
+                    infoCard.classList.remove('hidden');
+                } else {
+                    infoCard.classList.add('hidden');
+                }
+            } else {
+                infoCard.classList.add('hidden');
+            }
+        }
+
+        window.addEventListener('mousemove', onMouseMove, false);
+        window.addEventListener('click', onClick, false);
+    });
 
     // Handle window resize
     window.addEventListener('resize', onWindowResize, false);

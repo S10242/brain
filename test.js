@@ -51,7 +51,7 @@ function initStressTest() {
     qNum.textContent = `Q${currentQuestionIndex + 1}`;
     qProg.textContent = `${currentQuestionIndex + 1}/${questions.length}`;
     
-    const progressPercent = ((currentQuestionIndex) / questions.length) * 100;
+    const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
     progressBar.style.width = `${progressPercent}%`;
   }
 

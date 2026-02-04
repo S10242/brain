@@ -183,3 +183,15 @@
     font-size: 1.05rem;
   }
 }
+
+.hook-model {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2em;
+  line-height: 1.8;
+}
+
+.hook-model span {
+  font-size: 0.8em;
+  color: var(--color-secondary);
+}
